@@ -46,7 +46,7 @@ function constructCell(cell) {
         }
 
         default: {
-            content = getNormalCell(cell, true)
+            content = getNormalCell(cell)
             break
         }
     }
@@ -65,8 +65,8 @@ function getNumpadCell(cell) {
     )
 }
 
-function getNormalCell(cell, isDefault= false) {
-    return <div data-cell={JSON.stringify(cell)} className={isDefault ? 'errorCell' : ''} >{cell.Name}</div>
+function getNormalCell(cell) {
+    return <div data-cell={JSON.stringify(cell)} >{cell.Name}</div>
 }
 
 function getDropDownCell(cell) {

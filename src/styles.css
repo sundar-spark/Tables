@@ -46,9 +46,3 @@ caption {
 .addRow:hover {
   background: #dddeee;
 }
-
-.errorCell {
-  background: #ffabab;
-  padding: 10px;
-  border-radius: 4px;
-}
