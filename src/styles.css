@@ -4,7 +4,7 @@
 }
 
 .table {
-  border: 1px solid #dddddd;
+  border: 1px solid black;
 }
 
 tr:nth-child(even) {
@@ -13,7 +13,42 @@ tr:nth-child(even) {
 
 .cell,
 .cellHeader {
-  border: 1px solid #dddddd;
+  border: 1px solid black;
   text-align: left;
-  padding: 8px;
+  padding: 10px 35px;
+}
+
+.layout {
+  margin: 2%
+}
+
+.tablePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.tableContainer {
+  margin-bottom: 50px;
+}
+
+caption {
+  padding: 10px;
+  border: 1px solid black;
+  border-bottom: none;
+  background: #dddddd;
+}
+
+.addRow {
+  cursor: pointer;
+}
+
+.addRow:hover {
+  background: #dddeee;
+}
+
+.errorCell {
+  background: #ffabab;
+  padding: 10px;
+  border-radius: 4px;
 }

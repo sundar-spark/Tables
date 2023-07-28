@@ -1,6 +1,18 @@
-import { CategoryTable } from "./Components/CategoryTable";
+import { CategoryTable } from "./Components/CategoryTable/CategoryTable";
 import "./styles.css";
+import {getCategoriesSortedMemoized} from "./Utils/traversalUtils";
 
 export default function App() {
-  return <CategoryTable />;
+  const categories = getCategoriesSortedMemoized()
+  return (
+      <div className={'layout'}>
+        <div className={'tablePage'}>
+            {categories.map(category =>
+                <div key={category} className={'tableContainer'}>
+                    <CategoryTable category={category}/>
+                </div>
+            )}
+        </div>
+      </div>
+  )
 }
