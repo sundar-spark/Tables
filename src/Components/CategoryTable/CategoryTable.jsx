@@ -15,7 +15,7 @@ export function CategoryTable(props) {
       const index = cells.findIndex(cell => cell.ItemID === cellId)
       const updatedData = [...cells];
       if(updatedData[index].InputID != 3) {
-          updatedData[index] = {...updatedData[index], Name: newValue}
+          updatedData[index] = {...updatedData[index], Value: newValue}
           setCells(updatedData);
           setTableRows(generateRowFromCells(updatedData))
       }
@@ -45,8 +45,20 @@ export function CategoryTable(props) {
       setTableRows(generateRowFromCells(updatedCells))
   }
 
+  function onTableClick(event) {
+      if(event.target.dataset.action === 'delete') {
+          const rowToBeDeleted = event.target.dataset.row;
+          const updatedCells = cells.filter(cell => {
+              return cell.RowWiseDisplayOrder !== Number(rowToBeDeleted)
+          })
+          setCells(updatedCells)
+          setTableRows(generateRowFromCells(updatedCells))
+      }
+  }
+
+
   return (
-    <table onChange={onTableChange} className={'table'} >
+    <table onChange={onTableChange} onClick={onTableClick} className={'table'} >
       <caption>{category.CategoryName}</caption>
       <tbody>
       {tableRows.map((row, index) => (

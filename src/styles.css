@@ -46,3 +46,14 @@ caption {
 .addRow:hover {
   background: #dddeee;
 }
+
+.deleteButton {
+  padding: 0 10px 0 10px;
+  border: 1px solid black;
+  background: #dddddd;
+}
+
+.deleteButton:hover {
+  background: #fa9898;
+  cursor: pointer;
+}

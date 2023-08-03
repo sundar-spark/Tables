@@ -4,18 +4,37 @@ import {getDropDownItemsForCell} from "../../Utils/traversalUtils";
 
 export function generateRowFromCells(cells) {
     let prevRow = cells[0].RowWiseDisplayOrder, tableRows = [[]], rowCounter = 0;
-    cells.forEach(cell => {
-        if(!(cell.RowWiseDisplayOrder === prevRow)) {
-            rowCounter++;
-            tableRows[rowCounter] = [];
-            prevRow = cell.RowWiseDisplayOrder;
-        }
+    const isCollection = cells[0].IsCollection;
+    cells.forEach((cell, index) => {
+
         const cellElement = constructCell(cell)
         tableRows[rowCounter].push(cellElement)
+
+        const nextCell = cells[index+1];
+        if(nextCell) {
+            if(!(nextCell.RowWiseDisplayOrder === prevRow)) {
+                if(rowCounter!=0 && rowCounter!=1 && isCollection) {
+                    tableRows[rowCounter].push(constructDeleteButton(prevRow))
+                }
+                rowCounter++;
+                tableRows[rowCounter] = [];
+                prevRow = nextCell.RowWiseDisplayOrder;
+            }
+        }
+        if(!nextCell && isCollection && rowCounter!=1) {
+            tableRows[rowCounter].push(constructDeleteButton(prevRow))
+        }
     })
     return tableRows;
 }
 
+function constructDeleteButton(row) {
+    return (
+        <td data-row={row} data-action={'delete'}  className={'deleteButton'}>
+            &#128465; Delete
+        </td>
+    )
+}
 function constructCell(cell) {
     const isHeader = cell.IsHeader === "Y";
     let content;
@@ -55,7 +74,7 @@ function constructCell(cell) {
 
 function getTextInputCell(cell) {
     return (
-        <input data-cell={JSON.stringify(cell)} type="text" defaultValue= {cell.Name}/>
+        <input data-cell={JSON.stringify(cell)} type="text" defaultValue= {cell.Value}/>
     )
 }
 

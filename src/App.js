@@ -8,7 +8,7 @@ export default function App() {
       <div className={'layout'}>
         <div className={'tablePage'}>
             {categories.map(category =>
-                <div key={category} className={'tableContainer'}>
+                <div key={category.CategoryID} className={'tableContainer'}>
                     <CategoryTable category={category}/>
                 </div>
             )}
